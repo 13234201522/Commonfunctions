@@ -1,6 +1,6 @@
 <?php
 
-namespace bridge;
+namespace bridge\traits;
 
 /**
  * RSA签名类

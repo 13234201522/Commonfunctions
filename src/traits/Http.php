@@ -1,7 +1,7 @@
 <?php
 
 
-namespace bridge;
+namespace bridge\traits;
 
 
 /**

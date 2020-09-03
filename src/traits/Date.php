@@ -1,6 +1,6 @@
 <?php
 
-namespace bridge;
+namespace bridge\traits;
 
 use DateTime;
 use DateTimeZone;
