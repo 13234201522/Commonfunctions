@@ -7,7 +7,7 @@ namespace bridge;
 /**
  * 随机生成类
  */
-class Random
+trait Random
 {
 
     /**
