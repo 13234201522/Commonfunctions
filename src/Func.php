@@ -4,7 +4,7 @@ namespace bridge;
 
 class Func
 {
-    use Http, Pinyin;
+    use Http, Pinyin, Date, Random, Rsa, Tree;
 
     public function __construct()
     {
