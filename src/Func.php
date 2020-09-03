@@ -2,7 +2,7 @@
 
 namespace bridge;
 
-class Func
+trait Func
 {
     public function __construct()
     {
@@ -15,7 +15,7 @@ class Func
      * @param $url
      * @return bool
      */
-    public static function isFullImage($url)
+    public function isFullImage($url)
     {
         $parse = parse_url($url);
         if (isset($parse['scheme'])) {
@@ -31,8 +31,8 @@ class Func
      * @param $filesize
      * @return string
      */
-    public static function getSize($url) {
-        $filesize = strlen(file_get_contents(cdnurl($url)));
+    public function getSize($url) {
+        $filesize = strlen(file_get_contents($url));
         if($filesize >= 1073741824) {
             $filesize = round($filesize / 1073741824 * 100) / 100 . ' GB';
         } elseif($filesize >= 1048576) {
@@ -64,7 +64,7 @@ class Func
         return $value;
     }
 
-    function hsv2rgb($h, $s, $v)
+    public function hsv2rgb($h, $s, $v)
     {
         $r = $g = $b = 0;
 
@@ -121,7 +121,7 @@ class Func
      * @param $url
      * @return array|false|string
      */
-    public static function download($url){
+    public function download($url){
         ob_start();
         readfile($url);
         $img=ob_get_contents();
@@ -161,7 +161,7 @@ class Func
      * @param $l2
      * @return string|string[]
      */
-    protected function lIIIIl($l1, $l2)
+    public function lIIIIl($l1, $l2)
     {
         if (preg_match("/(.*)(href|src)\=(.+?)( |\/\>|\>).*/i", $l1, $regs)) {
             $I2 = $regs [3];
@@ -223,7 +223,7 @@ class Func
      * @param $string
      * @return string
      */
-    public static function contentToText($string){
+    public function contentToText($string){
         if($string){
             //把一些预定义的 HTML 实体转换为字符
             $html_string = htmlspecialchars_decode($string);
