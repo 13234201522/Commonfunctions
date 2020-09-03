@@ -2,7 +2,7 @@
 
 namespace bridge;
 
-trait Func
+class Func
 {
     public function __construct()
     {
@@ -15,7 +15,7 @@ trait Func
      * @param $url
      * @return bool
      */
-    public function isFullImage($url)
+    public static function isFullImage($url)
     {
         $parse = parse_url($url);
         if (isset($parse['scheme'])) {
@@ -31,7 +31,7 @@ trait Func
      * @param $filesize
      * @return string
      */
-    public function getSize($url) {
+    public static function getSize($url) {
         $filesize = strlen(file_get_contents($url));
         if($filesize >= 1073741824) {
             $filesize = round($filesize / 1073741824 * 100) / 100 . ' GB';
@@ -50,11 +50,11 @@ trait Func
      * @param $text
      * @return string
      */
-    public function letter_avatar($text)
+    public static function letter_avatar($text)
     {
         $total = unpack('L', hash('adler32', $text, true))[1];
         $hue = $total % 360;
-        list($r, $g, $b) = $this->hsv2rgb($hue / 360, 0.3, 0.9);
+        list($r, $g, $b) = self::hsv2rgb($hue / 360, 0.3, 0.9);
 
         $bg = "rgb({$r},{$g},{$b})";
         $color = "#ffffff";
@@ -64,7 +64,7 @@ trait Func
         return $value;
     }
 
-    public function hsv2rgb($h, $s, $v)
+    public static function hsv2rgb($h, $s, $v)
     {
         $r = $g = $b = 0;
 
@@ -121,7 +121,7 @@ trait Func
      * @param $url
      * @return array|false|string
      */
-    public function download($url){
+    public static function download($url){
         ob_start();
         readfile($url);
         $img=ob_get_contents();
@@ -144,11 +144,11 @@ trait Func
      * @param $content
      * @return mixed
      */
-    public function contentImageUrl($html_content, $host)
+    public static function contentImageUrl($html_content, $host)
     {
         if (preg_match_all("/(<img[^>]+src=\"([^\"]+)\"[^>]*>)|(<a[^>]+href=\"([^\"]+)\"[^>]*>)|(<img[^>]+src='([^']+)'[^>]*>)|(<a[^>]+href='([^']+)'[^>]*>)/i", $html_content, $regs)) {
             foreach ($regs [0] as $num => $url) {
-                $html_content = str_replace($url, $this->lIIIIl($url, $host), $html_content);
+                $html_content = str_replace($url, self::lIIIIl($url, $host), $html_content);
             }
         }
         return $html_content;
@@ -161,7 +161,7 @@ trait Func
      * @param $l2
      * @return string|string[]
      */
-    public function lIIIIl($l1, $l2)
+    public static function lIIIIl($l1, $l2)
     {
         if (preg_match("/(.*)(href|src)\=(.+?)( |\/\>|\>).*/i", $l1, $regs)) {
             $I2 = $regs [3];
@@ -223,7 +223,7 @@ trait Func
      * @param $string
      * @return string
      */
-    public function contentToText($string){
+    public static function contentToText($string){
         if($string){
             //把一些预定义的 HTML 实体转换为字符
             $html_string = htmlspecialchars_decode($string);
