@@ -2,6 +2,13 @@
 
 namespace bridge;
 
+use bridge\traits\Date;
+use bridge\traits\Http;
+use bridge\traits\Pinyin;
+use bridge\traits\Random;
+use bridge\traits\Rsa;
+use bridge\traits\Tree;
+
 class Func
 {
     use Http, Pinyin, Date, Random, Rsa, Tree;
